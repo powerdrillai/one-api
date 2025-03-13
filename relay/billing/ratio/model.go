@@ -132,6 +132,7 @@ var ModelRatio = map[string]float64{
 	"gemini-2.0-flash-exp":                0.075 * MILLI_USD,
 	"gemini-2.0-flash":                    0.15 * MILLI_USD,
 	"gemini-2.0-flash-001":                0.15 * MILLI_USD,
+	"gemini-2.0-flash-lite":               0.075 * MILLI_USD,
 	"gemini-2.0-flash-lite-preview-02-05": 0.075 * MILLI_USD,
 	"gemini-2.0-flash-thinking-exp-01-21": 0.075 * MILLI_USD,
 	"gemini-2.0-pro-exp-02-05":            1.25 * MILLI_USD,
