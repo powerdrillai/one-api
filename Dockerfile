@@ -38,7 +38,16 @@ RUN go build -trimpath -ldflags "-s -w -X 'github.com/songquanpeng/one-api/commo
 
 FROM alpine:latest
 
-RUN apk add --no-cache ca-certificates tzdata
+# ENV for tiktoken offline model. See also README.tiktoken.md
+# This must be set before invoking /opt/scripts/pre_download_tiktoken.sh
+ENV TIKTOKEN_CACHE_DIR="/opt/tiktoken"
+
+COPY scripts /opt/scripts
+
+RUN set -xe && \
+    apk add --no-cache ca-certificates tzdata && \
+    ls -l /opt/scripts/pre_download_tiktoken.sh && \
+    sh /opt/scripts/pre_download_tiktoken.sh
 
 COPY --from=builder2 /build/one-api /
 
