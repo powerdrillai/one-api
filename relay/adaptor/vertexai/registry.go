@@ -2,6 +2,7 @@ package vertexai
 
 import (
 	"net/http"
+	"strings"
 
 	"github.com/gin-gonic/gin"
 	claude "github.com/songquanpeng/one-api/relay/adaptor/vertexai/claude"
@@ -45,6 +46,14 @@ func GetAdaptor(model string) innerAIAdapter {
 	case VerterAIGemini:
 		return &gemini.Adaptor{}
 	default:
+		// Handle model names that aren't in the mapping but start with known prefixes
+		if len(model) > 0 {
+			if strings.HasPrefix(model, "gemini-") {
+				return &gemini.Adaptor{}
+			} else if strings.HasPrefix(model, "claude-") {
+				return &claude.Adaptor{}
+			}
+		}
 		return nil
 	}
 }
